@@ -1,0 +1,60 @@
+{
+  "services": [
+    {
+      "tag": "A",
+      "fullname": "Service A",
+      "limit": 10
+    },
+    {
+      "tag": "B",
+      "fullname": "Service B",
+      "limit": 10
+    },
+    {
+      "tag": "C",
+      "fullname": "Service C",
+      "limit": 10
+    },
+    {
+      "tag": "D",
+      "fullname": "Service D",
+      "limit": 10
+    },
+    {
+      "tag": "E",
+      "fullname": "Service E",
+      "limit": 10
+    },
+    {
+      "tag": "F",
+      "fullname": "Service F",
+      "limit": 10
+    }
+  ],
+  "graph": [
+    {
+      "tag": "A",
+      "neighbors": ["B", "C"]
+    },
+    {
+      "tag": "B",
+      "neighbors": ["D", "E"]
+    },
+    {
+      "tag": "C",
+      "neighbors": ["F"]
+    },
+    {
+      "tag": "D",
+      "neighbors": []
+    },
+    {
+      "tag": "E",
+      "neighbors": ["F"]
+    },
+    {
+      "tag": "F",
+      "neighbors": []
+    }
+  ]
+}
