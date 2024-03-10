@@ -1,0 +1,9 @@
+company_name: GoTest
+
+info_output:
+  - gui: on
+  - console: on
+
+is_check_cycle: on
+
+# and more setting after...
