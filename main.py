@@ -1,29 +1,23 @@
+from program_ini import ProgramIni
 from load_from_json import *
+from graph_algo import AlgoGraph
 
 
-def dfs_iterative(graph_in_algo, start):
-    visited = set()
-    stack = [start]
-
-    while stack:
-        vertex = stack.pop()
-        if vertex not in visited:
-            print(vertex.get_name())
-            visited.add(vertex)
-
-            neighbors = graph_in_algo[vertex]
-
-            for neighbor, weight in reversed(neighbors):
-                if neighbor not in visited:
-                    stack.append(neighbor)
-
-
-if __name__ == "__main__":
+def do_magic_work():
     # maybe upload a workload from json file
     graph, microservices = loading_json_info('data.json')
     keys = list(graph.keys())
 
-    entry_point = keys[0].set_workload(10_000)
+    entry_point = keys[0].set_workload(10_000)  # added for each check if in master-config.yml
+    # TODO do set_workload after top_sort
 
-    print(keys[0])
-    dfs_iterative(graph, entry_point)  # first element of json
+    algo_graph = AlgoGraph("TestAlgo")
+    # algo_graph.dfs_iterative(graph, entry_point)
+    test_queue = algo_graph.top_sort(graph, entry_point)
+    for item in test_queue:
+        print(item.get_name())
+
+
+if __name__ == "__main__":
+    prog = ProgramIni()  # exec
+    do_magic_work()
