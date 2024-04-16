@@ -15,7 +15,7 @@ class AlgoGraph(Algo):
 
         while stack:
             vertex, color = stack.pop()
-            if vertex not in visited:
+            if vertex not in visited: # если vertex уже в visited, то это цикл
                 print(vertex.get_name(), "- Color:", color)
                 visited.add(vertex)
 
@@ -24,7 +24,7 @@ class AlgoGraph(Algo):
                 for neighbor, _ in reversed(neighbors):
                     if neighbor not in visited:
                         stack.append((neighbor, GRAY))
-                stack.append((vertex, BLACK))
+                # stack.append((vertex, BLACK))
                 topological_queue.append(vertex)
         return topological_queue
 
