@@ -5,25 +5,25 @@ class Algo:
 
 class AlgoGraph(Algo):
     def top_sort(self, graph_in_algo, start):
-        WHITE = 0
-        GRAY = 1
-        BLACK = 2
 
         visited = set()
-        stack = [(start, WHITE)]
+        stack = [start]
+        stack_calls = []
+        order = []
         topological_queue = []
 
+        print(graph_in_algo)
         while stack:
-            vertex, color = stack.pop()
+            vertex = stack.pop()
             if vertex not in visited: # если vertex уже в visited, то это цикл
-                print(vertex.get_name(), "- Color:", color)
+                print(vertex.get_name())
                 visited.add(vertex)
 
                 neighbors = graph_in_algo.get(vertex, [])
 
                 for neighbor, _ in reversed(neighbors):
                     if neighbor not in visited:
-                        stack.append((neighbor, GRAY))
+                        stack.append(neighbor)
                 # stack.append((vertex, BLACK))
                 topological_queue.append(vertex)
         return topological_queue
