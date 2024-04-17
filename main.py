@@ -5,7 +5,8 @@ from graph_algo import AlgoGraph
 
 def do_magic_work():
     # maybe upload a workload from json file
-    graph, microservices = loading_json_info('data.json')
+    # TODO добавить ввод файла и нагрузку
+    graph, microservices = loading_json_info('data_examples/data_full_example.json')
     keys = list(graph.keys())
 
     entry_point = keys[0].set_workload(10_000)  # added for each check if in master-config.yml
@@ -19,5 +20,8 @@ def do_magic_work():
 
 
 if __name__ == "__main__":
-    prog = ProgramIni()  # exec
-    do_magic_work()
+    try:
+        prog = ProgramIni()  # exec
+        do_magic_work()
+    except ValueError as error:
+        print("Error:", error)
