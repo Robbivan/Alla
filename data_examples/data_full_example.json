@@ -1,0 +1,67 @@
+{
+  "services": [
+    {
+      "tag": "*",
+      "fullname": "Service entrypoint (NGINX) *",
+      "limit": "None",
+      "neighbors": [
+        {"tag": "A", "weight": 0.4},
+        {"tag": "G", "weight": 0.1},
+        {"tag": "B", "weight": 0.3},
+        {"tag": "D", "weight": 0.2}
+      ]
+    },
+    {
+      "tag": "A",
+      "fullname": "Service A",
+      "limit": 2600,
+      "neighbors": [
+        {"tag": "B", "weight": 0.7}
+      ]
+    },
+    {
+      "tag": "B",
+      "fullname": "Service B",
+      "limit": 5800,
+      "neighbors": [
+        {"tag": "F", "weight": 0.4},
+        {"tag": "D", "weight": 0.6}
+      ]
+    },
+    {
+      "tag": "G",
+      "fullname": "Service G",
+      "limit": 5000,
+      "neighbors": [
+         {"tag": "A", "weight": 1}
+      ]
+    },
+    {
+      "tag": "F",
+      "fullname": "Service F",
+      "limit": 5000,
+      "neighbors": []
+    },
+    {
+      "tag": "C",
+      "fullname": "Service C",
+      "limit": 7000,
+      "neighbors": []
+    },
+    {
+      "tag": "D",
+      "fullname": "Service D",
+      "limit": 12300,
+      "neighbors": [
+        {"tag": "C", "weight": 0.3},
+        {"tag": "E", "weight": 0.7}
+      ]
+    },
+    {
+      "tag": "E",
+      "fullname": "Service E",
+      "limit": 1300,
+      "neighbors": []
+    }
+  ]
+}
