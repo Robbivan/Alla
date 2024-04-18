@@ -1,4 +1,5 @@
 company_name: GoTest
+project_name: TestPr
 
 info_output:
   - gui: on

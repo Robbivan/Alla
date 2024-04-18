@@ -15,7 +15,6 @@ class AlgoGraph(Algo):
             vertex = stack_vertex.pop()
             if vertex not in visited:  # если vertex уже в visited, то это цикл
                 visited.add(vertex)
-
                 stack_vertex.extend([item[0] for item in graph_in_algo[vertex]])
 
                 while stack_calls and vertex not in [item[0] for item in graph_in_algo[stack_calls[-1]]]:
