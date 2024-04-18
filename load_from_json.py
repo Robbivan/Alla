@@ -33,6 +33,7 @@ def create_graph_from_json(json_data, microservices):
             except KeyError as error:
                 raise ValueError("No exist microservice in *.json with name:", error)
         graph[microservices[tag]] = correct_neighbors
+
         #graph[microservices[tag]] = [(microservices[neighbor['tag']], neighbor['weight']) for neighbor in neighbors]
 
     print(graph)

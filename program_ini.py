@@ -4,6 +4,7 @@ import yaml
 class ProgramIni:
     def __init__(self, config_name="config/master-config.yml"):
         self.company_name = None
+        self.project_name = None
         self.info_output = None
         self.is_check_cycle = None
 
@@ -14,6 +15,7 @@ class ProgramIni:
             data = yaml.safe_load(file)
         print(data)
         self.company_name = data['company_name']
+        self.project_name = data['project_name']
         self.info_output = data['info_output']
         self.is_check_cycle = data['is_check_cycle']
 

@@ -23,6 +23,7 @@ def do_magic_work():
     print(test_queue)
     for item in test_queue:
         print(item.tag)
+
     # for item in test_queue:
     #     print(item.get_name())
 
