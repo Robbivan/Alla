@@ -8,11 +8,10 @@ def create_microservices_from_json(json_data):
     for service_data in json_data:
         tag = service_data['tag']
         fullname = service_data['fullname']
-        limit = service_data['limit']
-        # if limit == "None":
-        #     continue
-        # if limit < 0:
-        #     raise ValueError("limit must be 0 or more")
+        limit = None
+        if 'limit' in service_data:
+            limit = service_data['limit']
+
         microservices[tag] = Microservice(tag, fullname, limit)
     return microservices
 
@@ -50,4 +49,4 @@ def loading_json_info(filename):
         print("No data")
 
     print("Loading struct from file complete successful")
-    return create_graph_from_json(data['services'], microservices), microservices
+    return create_graph_from_json(data['services'], microservices)
