@@ -22,5 +22,12 @@ class AlgoGraph(Algo):
                 stack_calls.append(vertex)
         return stack_calls + order[::-1]  # new return value
 
+    def find_workload(self, graph, start, sequence):
+        for micro in sequence:
+            for link in graph[micro]:
+                current_workload = micro.get_workload()
+                link[0].set_workload(link[0].get_workload()+current_workload*link[1])
+
+
     def cycle_search(self):
         pass
