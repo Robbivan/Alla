@@ -1,6 +1,7 @@
 class Algo:
-    def __init__(self, name):
+    def __init__(self, name, round_number):
         self.name = name
+        self.round_number = round_number
 
 
 class AlgoGraph(Algo):
@@ -22,12 +23,15 @@ class AlgoGraph(Algo):
                 stack_calls.append(vertex)
         return stack_calls + order[::-1]  # new return value
 
-    def find_workload(self, graph, start, sequence):
+    def find_workload(self, graph, sequence):
         for micro in sequence:
             for link in graph[micro]:
-                current_workload = micro.get_workload()
-                link[0].set_workload(link[0].get_workload()+current_workload*link[1])
+                current_workload_to_other = micro.get_workload()*(1-micro.get_rest())
+                # print(self.round_number)
+                link[0].set_workload(round(link[0].get_workload()+current_workload_to_other*link[1], self.round_number))
 
 
     def cycle_search(self):
         pass
+
+

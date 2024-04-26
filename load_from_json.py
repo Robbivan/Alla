@@ -11,8 +11,12 @@ def create_microservices_from_json(json_data):
         limit = None
         if 'limit' in service_data:
             limit = service_data['limit']
-
-        microservices[tag] = Microservice(tag, fullname, limit)
+        rest = 0  # default value for flow
+        if 'rest' in service_data:
+            rest = service_data['rest']
+            if rest < 0 or rest > 1:
+                raise ValueError("Weight must be between 0 and 1 in rest", rest)
+        microservices[tag] = Microservice(tag, fullname, limit, rest)
     return microservices
 
 
