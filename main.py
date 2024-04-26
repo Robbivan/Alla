@@ -10,7 +10,6 @@ from pyvis.network import Network
 def do_gui(program, graph, sort_list_graph):
     net = Network(notebook=True)  # отображение в Блокноте
 
-
     net.add_nodes([item.id for item in sort_list_graph],
                   label=[item.tag for item in sort_list_graph])
 
@@ -19,8 +18,6 @@ def do_gui(program, graph, sort_list_graph):
     for micro in keys:
         for link in graph[micro]:
             net.add_edge(micro.id, link[0].id)
-
-
     print(graph)
 
 
