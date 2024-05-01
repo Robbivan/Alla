@@ -25,18 +25,17 @@ def static_analysis(graph, algo, entry_point):
 
 def dynamic_analysis(graph):
     prom = IntegrationPrometheus()
-    prom.set_live_workload(graph)
+    if args.emulate_dynamic:
+        prom.set_emulate_live_workload(graph, args.emulate_dynamic)
+    else:
+        prom.set_live_workload(graph)
 
 
 def do_hidden_work(program):
-    # maybe upload a workload from json file
-    # TODO добавить ввод файла и нагрузку
-    graph = loading_json_info('data_examples/data_full_example.json')
-    # graph = loading_json_info('data_examples/data_with_cycle.json')
+    graph = loading_json_info(program.json_file)
 
     entry_point = next((key for key in graph.keys() if key.tag == '*'), None)
-    entry_point.set_model_workload(10_000)  # added for each check if in master-config.yml
-    # TODO do set_workload after top_sort
+    entry_point.set_model_workload(program.gateway_load)
 
     algo = AlgoGraph("TestAlgo", program.get_round_number())
 
@@ -48,30 +47,23 @@ def do_hidden_work(program):
     sort_list_graph = static_analysis(graph, algo, entry_point)
     dynamic_analysis(graph)
 
-    # bo,val = algo_graph.cycle_search(graph, entry_point)
-    # print(bo)
-    # print(val)
-
     do_gui(program, graph, sort_list_graph)
-
 
 
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description='keys')
-    parser.add_argument('-a', '--arg1', help='desc1')
+    parser.add_argument('-emulate_dynamic', '--emulate_dynamic',
+                        help='Parameter for emulate dynamic workload with custom metric '
+                             'from directory emulate_dynamic/{your_directory}. ' 
+                             'Accept a name of directory where custom metrics save')
     args = parser.parse_args()
-    if args.arg1:
-        print("got", args.arg1)
+    if args.emulate_dynamic:
+        print("got", args.emulate_dynamic)
 
     try:
         prog = ProgramIni()  # exec
         do_hidden_work(prog)
-        # prog.foo([])
 
-
-
-        # prom.micro_names
     except ValueError as error:
         print("Error:", error)
-

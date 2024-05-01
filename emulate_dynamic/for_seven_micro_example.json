@@ -1,0 +1,25 @@
+{
+   "A":{"status":"success",
+    "data":{"resultType":"vector","result":[{"metric":{},"value"
+    :[1714568437.128,"2700.0"]}]}},
+   "B":{"status":"success",
+    "data":{"resultType":"vector","result":[{"metric":{},"value"
+    :[1714568437.128,"2800.3"]}]}},
+   "G":{"status":"success",
+    "data":{"resultType":"vector","result":[{"metric":{},"value"
+    :[1714568437.128,"4023.0"]}]}},
+   "F":{"status":"success",
+    "data":{"resultType":"vector","result":[{"metric":{},"value"
+    :[1714568437.128,"1020.7"]}]}},
+   "D":{"status":"success",
+    "data":{"resultType":"vector","result":[{"metric":{},"value"
+    :[1714568437.128,"5340.9"]}]}},
+   "C":{"status":"success",
+    "data":{"resultType":"vector","result":[{"metric":{},"value"
+    :[1714568437.128,"2000.0"]}]}},
+   "E":{"status":"success",
+    "data":{"resultType":"vector","result":[{"metric":{},"value"
+    :[1714568437.128,"2020.2"]}]}}
+}
+
+
