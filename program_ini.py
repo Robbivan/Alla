@@ -7,6 +7,9 @@ class ProgramIni:
         self.project_name = None
         self.info_output = None
         self.is_check_cycle = None
+        self.round_number = 4  # default round number
+        self.json_file = None
+        self.gateway_load = None
 
         self.__upload_settings_from_master_config(config_name)
 
@@ -17,7 +20,8 @@ class ProgramIni:
         self.project_name = data['project_name']
         self.info_output = data['info_output']
         self.is_check_cycle = data['is_check_cycle']
-        self.round_number = 4  # default round number
+        self.json_file = data['json_file']
+        self.gateway_load = data['gateway_load']
         if data['round_result']['status'] is True:
             self.round_number = data['round_result']['number_of_decimal_places']
 

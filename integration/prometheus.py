@@ -1,5 +1,6 @@
 import requests
 import yaml
+import json
 from urllib.parse import quote
 
 
@@ -40,16 +41,26 @@ class IntegrationPrometheus:
         return response.json()
 
     def set_live_workload(self, graph):
-        result_jsons = {}
+        metrics_json = {}
         print(self.micro_names)
         for micro in self.micro_names.keys():
-            result_jsons[self.micro_names[micro]] = self.send_request_query(micro)
-        print(result_jsons)
+            metrics_json[self.micro_names[micro]] = self.send_request_query(micro)
+        print(metrics_json)
+        self.parse_metric_json(graph,metrics_json)
 
+    def set_emulate_live_workload(self, graph, filename):
+        path_to_file = "emulate_dynamic/" + filename
+        with open(path_to_file) as json_file:
+            metrics_json = json.load(json_file)
+        print(metrics_json)
+
+        self.parse_metric_json(graph,metrics_json)
+
+    def parse_metric_json(self, graph, metrics_json):
         try:
             for micro in graph.keys():
-                if micro.tag in result_jsons.keys():
-                    temp_json = result_jsons[micro.tag]['data']['result']
+                if micro.tag in metrics_json.keys():
+                    temp_json = metrics_json[micro.tag]['data']['result']
                     if temp_json:
                         print(temp_json[0]['value'][1])
                         micro.set_dynamic_workload(temp_json[0]['value'][1])

@@ -15,3 +15,11 @@ integration:
 round_result:
    status: on
    number_of_decimal_places: 5
+
+################################ Settings for json
+
+json_file:
+  "data/data_seven_micro_example.json"
+
+gateway_load:
+  10000
