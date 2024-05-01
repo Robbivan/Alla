@@ -30,6 +30,11 @@ def do_gui(program, graph, sort_list_graph):
 
     current_directory = os.path.dirname(__file__)
 
-    html_directory = os.path.join(current_directory, 'html')
-    file_path = os.path.join(html_directory, 'result.html')
-    webbrowser.open(file_path, new=2)  # open in new tab
+    # html_directory = os.path.join(current_directory, 'html')
+    # file_path = os.path.join(html_directory, 'result.html')
+    # webbrowser.get('safari').open(file_path, new=2)  # open in new tab
+
+    filename = 'file:///' + os.getcwd() + '/html/' + 'result.html'
+    webbrowser.open_new_tab(filename)
+
+    # print(file_path)

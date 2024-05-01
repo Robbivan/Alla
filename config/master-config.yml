@@ -7,8 +7,11 @@ info_output:
 
 is_check_cycle: on
 
+# live load
+integration:
+  prometheus: on
+
+
 round_result:
    status: on
    number_of_decimal_places: 5
-
-# and more setting after...

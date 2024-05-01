@@ -1,4 +1,3 @@
-
 class Microservice:
     id_counter = 0
 
@@ -7,16 +6,22 @@ class Microservice:
         self.id = Microservice.id_counter  # Присваиваем ID текущему экземпляру
         self.tag = tag
         self.fullname = fullname
-        self.workload = workload
+        self.model_workload = workload
+        self.dynamic_workload = workload
         self.limit = limit
         self.rest = rest
 
-    def set_workload(self, workload):
-        self.workload = workload
-        return self
+    def set_model_workload(self, workload):
+        self.model_workload = workload
 
-    def get_workload(self):
-        return self.workload
+    def set_dynamic_workload(self, workload):
+        self.dynamic_workload = workload
+
+    def get_model_workload(self):
+        return self.model_workload
+
+    def get_dynamic_workload(self, workload):
+        return self.dynamic_workload
 
     def get_rest(self):
         return self.rest

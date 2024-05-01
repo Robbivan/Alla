@@ -26,12 +26,34 @@ class AlgoGraph(Algo):
     def find_workload(self, graph, sequence):
         for micro in sequence:
             for link in graph[micro]:
-                current_workload_to_other = micro.get_workload()*(1-micro.get_rest())
+                current_workload_to_other = micro.get_model_workload() * (1 - micro.get_rest())
                 # print(self.round_number)
-                link[0].set_workload(round(link[0].get_workload()+current_workload_to_other*link[1], self.round_number))
+                link[0].set_model_workload(
+                    round(link[0].get_model_workload() + current_workload_to_other * link[1], self.round_number))
 
+    def cycle_search(self, graph_in_algo, start):
+        stack = [start]
+        visited = dict.fromkeys(graph_in_algo.keys(), "white")
 
-    def cycle_search(self):
-        pass
+        while stack:
+            vertex = self.__peek_stack(stack)
+            if visited[vertex] != "grey":
+                visited[vertex] = "grey"
+                for neighbour_vertex in [item[0] for item in graph_in_algo[vertex]]:
+                    if visited[neighbour_vertex] == "white":
+                        stack.append(neighbour_vertex)
+                    elif visited[neighbour_vertex] == "grey":
+                        result = [vertex, neighbour_vertex, visited]
+                        print("Find cycle")
+                        return True, result
+            elif visited[vertex] == "grey":
+                stack.pop()
+                visited[vertex] = "black"
+        print("No cycle")
+        return False, None
 
-
+    def __peek_stack(self, stack):
+        if stack:
+            return stack[-1]  # this will get the last element of stack
+        else:
+            return None
