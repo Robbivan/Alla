@@ -1,0 +1,20 @@
+protocol:
+  http
+
+domain:
+  localhost
+
+port:
+  9091
+
+# must match with names in metrics {name}_request_operations_total
+micro_names:
+  python:
+    A # tag for micro in json_file
+  node_js:
+    B
+
+measurement_time:
+  - 15
+  - s # seconds (could use m, h for minutes, hours)
+
