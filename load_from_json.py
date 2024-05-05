@@ -2,6 +2,8 @@ from microservice import Microservice
 import json
 
 
+# class LoaderGraph
+
 # Create microservice from json
 def create_microservices_from_json(json_data):
     microservices = {}
