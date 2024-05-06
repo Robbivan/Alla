@@ -1,7 +1,7 @@
 {
    "A":{"status":"success",
     "data":{"resultType":"vector","result":[{"metric":{},"value"
-    :[1714568437.128,"2700.0"]}]}},
+    :[1714568437.128,"2500.0"]}]}},
    "B":{"status":"success",
     "data":{"resultType":"vector","result":[{"metric":{},"value"
     :[1714568437.128,"2800.3"]}]}},
