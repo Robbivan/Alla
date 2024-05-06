@@ -13,7 +13,6 @@ class Gui:
         list_of_model_workload = [str(item.model_workload) for item in sort_list_graph]
         list_of_rest = [str(item.rest) for item in sort_list_graph]
 
-        # Используем генератор списка для создания нового списка строк
         modified_list = ["tag: " + tag + "\n" +
                          "fullname: " + fullname + "\n" +
                          "limit: " + limit + "\n" +
@@ -27,7 +26,6 @@ class Gui:
                              list_of_dynamic_workload,
                              list_of_model_workload,
                              list_of_rest)]
-        modified_list_fullnames = []
 
         print(modified_list)
         return modified_list
@@ -62,7 +60,7 @@ class Gui:
         #               y=[100.2, 23.54, 32.1],
         #               label=['NODE 1', 'NODE 2', 'NODE 3'],
         #               color=['#00ff1e', '#162347', '#dd4b39'])
-        net.show_buttons()
+        # net.show_buttons()
 
         net.show("html/result_temp.html")
 
@@ -82,9 +80,10 @@ class Gui:
         first_html_content = (html_content[:start_index] + "<center>\n<h1>" + title +
                               "</h1>\n</center>" + html_content[end_index:])
 
-        additional_text = "<p> Для микросервисов цвета: <br> <br> Зеленый - все в порядке с нагрузкой <br>" \
-                          " Красный - проблема несоответствия в моделируемой нагрузке и лимита <br> " \
-                          " Фиолетовый - проблема несоответствия реальной нагрузки и лимита</p>"
+        additional_text = "<p style='margin-left: 20px;'>Для микросервисов цвета: <br>" \
+                          "<span style='margin-left: 20px;'>Зеленый - все в порядке с нагрузкой</span> <br>" \
+                          "<span style='margin-left: 20px;'>Красный - проблема несоответствия в моделируемой нагрузке и лимита</span> <br>" \
+                          "<span style='margin-left: 20px;'>Фиолетовый - проблема несоответствия реальной нагрузки и лимита</span></p>"
 
         insert_index = first_html_content.find("</body>")
         second_html_content = first_html_content[:insert_index] + additional_text + first_html_content[insert_index:]

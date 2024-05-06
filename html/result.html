@@ -43,12 +43,6 @@
              
 
              
-             #config {
-                 float: left;
-                 width: 400px;
-                 height: 600px;
-             }
-             
 
              
         </style>
@@ -63,8 +57,6 @@
         </div>
 
         
-        
-            <div id="config"></div>
         
 
         <script type="text/javascript">
@@ -110,7 +102,7 @@
 
                   var options = {
     "configure": {
-        "enabled": true
+        "enabled": false
     },
     "edges": {
         "color": {
@@ -142,10 +134,6 @@
 
 
                   
-                  // if this network requires displaying the configure window,
-                  // put it in its div
-                  options.configure["container"] = document.getElementById("config");
-                  
 
                   network = new vis.Network(container, data, options);
 
@@ -163,5 +151,5 @@
               }
               drawGraph();
         </script>
-    <p> Для микроервисов цвета: <br> <br> Зеленый - все в порядке с нагрузкой <br> Красный - проблема несоответствия в моделируемой нагрузке и лимита <br>  Фиолетовый - проблема несоответствия реальной нагрузки и лимита</p></body>
+    <p style='margin-left: 20px;'>Для микросервисов цвета: <br><span style='margin-left: 20px;'>Зеленый - все в порядке с нагрузкой</span> <br><span style='margin-left: 20px;'>Красный - проблема несоответствия в моделируемой нагрузке и лимита</span> <br><span style='margin-left: 20px;'>Фиолетовый - проблема несоответствия реальной нагрузки и лимита</span></p></body>
 </html>
