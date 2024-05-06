@@ -19,7 +19,7 @@
 приложению   
 
 
-`python3 main.py -emulate_dynamic={your_directory}`
+`python3 main.py -emulate_dynamic={your_file}`
 
 {your_file.json} - json файл, содержащий информацию о метриках
 

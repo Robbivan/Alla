@@ -31,11 +31,8 @@ class IntegrationPrometheus:
             "sum(rate(" + micro_name + "_request_operations_total" + "[" + str(self.measurement_time[0]) \
             + self.measurement_time[1] + "]))")
         url_full = composite_url + url_formatted_prom_ql
-        try:
-            response = requests.get(url_full)
-        except:
-            print("exception(request is bad)")
-            return
+
+        response = requests.get(url_full)
 
         print(response.json())
         return response.json()
@@ -43,10 +40,14 @@ class IntegrationPrometheus:
     def set_live_workload(self, graph):
         metrics_json = {}
         print(self.micro_names)
-        for micro in self.micro_names.keys():
-            metrics_json[self.micro_names[micro]] = self.send_request_query(micro)
-        print(metrics_json)
-        self.parse_metric_json(graph,metrics_json)
+
+        try:
+            for micro in self.micro_names.keys():
+                metrics_json[self.micro_names[micro]] = self.send_request_query(micro)
+        except:
+            print("Can't find connection")
+            return
+        self.parse_metric_json(graph, metrics_json)
 
     def set_emulate_live_workload(self, graph, filename):
         path_to_file = "emulate_dynamic/" + filename
