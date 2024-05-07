@@ -47,7 +47,7 @@ class CreatorGraph:
         print(graph)
         return graph
 
-    def loading_json_info(self, filename):
+    def loading_json(self, filename):
         # Read data from json
         with open(filename) as json_file:
             data = json.load(json_file)

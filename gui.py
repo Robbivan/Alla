@@ -5,44 +5,33 @@ from pyvis.network import Network
 
 
 class Gui:
-    def make_info_str_node(self, sort_list_graph):
-        list_of_tags = [item.tag for item in sort_list_graph]
-        list_of_fullnames = [item.fullname for item in sort_list_graph]
-        list_of_limits = [str(item.limit) for item in sort_list_graph]
-        list_of_dynamic_workload = [str(item.dynamic_workload) for item in sort_list_graph]
-        list_of_model_workload = [str(item.model_workload) for item in sort_list_graph]
-        list_of_rest = [str(item.rest) for item in sort_list_graph]
-
-        modified_list = ["tag: " + tag + "\n" +
-                         "fullname: " + fullname + "\n" +
-                         "limit: " + limit + "\n" +
-                         "model_workload: " + model_workload + "\n" +
-                         "dynamic_workload: " + dynamic_workload + "\n" +
-                         "rest: " + rest + "\n"
-                         for tag, fullname, limit, dynamic_workload, model_workload, rest in
-                         zip(list_of_tags,
-                             list_of_fullnames,
-                             list_of_limits,
-                             list_of_dynamic_workload,
-                             list_of_model_workload,
-                             list_of_rest)]
-
-        print(modified_list)
-        return modified_list
-
 
     def do_gui(self, program, graph, sort_list_graph):
         net = Network(notebook=True)  # отображение в Блокноте
 
         color_nodes = ['#88F02E'] * len(sort_list_graph)
 
-        title_test = ["some_text\n anpther"] * len(sort_list_graph)
+        for item in sort_list_graph:
+            print(item.limit)
+            if item.limit is not None:
+                if item.model_workload > item.limit:
+                    index = sort_list_graph.index(item)
+                    color_nodes[index] = "#F53D56"
+                print(item.dynamic_workload)
+                if item.dynamic_workload is not None:
+                    if float(item.dynamic_workload) > item.limit:
+                            index = sort_list_graph.index(item)
+                            color_nodes[index] = "#C278EB"
 
-        new_title = self.make_info_str_node(sort_list_graph)
+
+
+        # print(color_nodes)
+
+        title = self.make_str_to_title_node(sort_list_graph, color_nodes)
 
         net.add_nodes([item.id for item in sort_list_graph],
                       label=[item.tag for item in sort_list_graph],
-                      title=new_title,
+                      title=title,
                       color=color_nodes)
 
         keys = graph.keys()
@@ -68,6 +57,31 @@ class Gui:
 
         filename = 'file:///' + os.getcwd() + '/html/' + 'result.html'
         webbrowser.open_new_tab(filename)
+
+    def make_str_to_title_node(self, sort_list_graph, color_nodes):
+        list_of_tags = [item.tag for item in sort_list_graph]
+        list_of_fullnames = [item.fullname for item in sort_list_graph]
+        list_of_limits = [str(item.limit) for item in sort_list_graph]
+        list_of_dynamic_workload = [str(item.dynamic_workload) for item in sort_list_graph]
+        list_of_model_workload = [str(item.model_workload) for item in sort_list_graph]
+        list_of_rest = [str(item.rest) for item in sort_list_graph]
+
+        modified_list = ["tag: " + tag + "\n" +
+                         "fullname: " + fullname + "\n" +
+                         "limit: " + limit + "\n" +
+                         "model_workload: " + model_workload + "\n" +
+                         "dynamic_workload: " + dynamic_workload + "\n" +
+                         "rest: " + rest + "\n"
+                         for tag, fullname, limit, dynamic_workload, model_workload, rest in
+                         zip(list_of_tags,
+                             list_of_fullnames,
+                             list_of_limits,
+                             list_of_dynamic_workload,
+                             list_of_model_workload,
+                             list_of_rest)]
+
+        print(modified_list)
+        return modified_list
 
     def html_info_edit(self):
         title = "Alla: ваша микросервисная сеть"
