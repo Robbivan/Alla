@@ -11,7 +11,7 @@ from integration.prometheus import IntegrationPrometheus
 class HandlerGraph:
     def __init__(self, program):
         creator = CreatorGraph()
-        self.graph = creator.loading_json_info(program.json_file)
+        self.graph = creator.loading_json(program.json_file)
         self.program = program
         self.gui = Gui()
 
@@ -52,8 +52,6 @@ class HandlerGraph:
         self.dynamic_analysis(self.graph)
 
         self.gui.do_gui(self.program, self.graph, sort_list_graph)
-
-
 
 
 if __name__ == "__main__":

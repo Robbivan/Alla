@@ -5,7 +5,7 @@ class Algo:
 
 
 class AlgoGraph(Algo):
-    def top_sort(self, graph_in_algo, start):
+    def top_sort(self, graph, start):
 
         visited = set()
         stack_vertex = [start]
@@ -16,9 +16,9 @@ class AlgoGraph(Algo):
             vertex = stack_vertex.pop()
             if vertex not in visited:  # если vertex уже в visited, то это цикл
                 visited.add(vertex)
-                stack_vertex.extend([item[0] for item in graph_in_algo[vertex]])
+                stack_vertex.extend([item[0] for item in graph[vertex]])
 
-                while stack_calls and vertex not in [item[0] for item in graph_in_algo[stack_calls[-1]]]:
+                while stack_calls and vertex not in [item[0] for item in graph[stack_calls[-1]]]:
                     order.append(stack_calls.pop())
                 stack_calls.append(vertex)
         return stack_calls + order[::-1]  # new return value
@@ -31,15 +31,15 @@ class AlgoGraph(Algo):
                 link[0].set_model_workload(
                     round(link[0].get_model_workload() + current_workload_to_other * link[1], self.round_number))
 
-    def cycle_search(self, graph_in_algo, start):
+    def cycle_search(self, graph, start):
         stack = [start]
-        visited = dict.fromkeys(graph_in_algo.keys(), "white")
+        visited = dict.fromkeys(graph.keys(), "white")
 
         while stack:
             vertex = self.__peek_stack(stack)
             if visited[vertex] != "grey":
                 visited[vertex] = "grey"
-                for neighbour_vertex in [item[0] for item in graph_in_algo[vertex]]:
+                for neighbour_vertex in [item[0] for item in graph[vertex]]:
                     if visited[neighbour_vertex] == "white":
                         stack.append(neighbour_vertex)
                     elif visited[neighbour_vertex] == "grey":
