@@ -23,7 +23,7 @@ class IntegrationPrometheus:
         self.port = data['port']
         self.micro_names = data['micro_names']
         self.measurement_time = data['measurement_time']
-        print(self.measurement_time)
+
 
     def send_request_query(self, micro_name):
         composite_url = self.protocol + "://" + self.domain + ":" + str(self.port) + "/api/v1/query?query="
@@ -39,9 +39,9 @@ class IntegrationPrometheus:
 
     def set_live_workload(self, graph):
         metrics_json = {}
-        print(self.micro_names)
-
+        print("microservices:\n", self.micro_names)
         try:
+            print("\nmetrics:")
             for micro in self.micro_names.keys():
                 metrics_json[self.micro_names[micro]] = self.send_request_query(micro)
         except:
@@ -53,17 +53,18 @@ class IntegrationPrometheus:
         path_to_file = "emulate_dynamic/" + filename
         with open(path_to_file) as json_file:
             metrics_json = json.load(json_file)
-        print(metrics_json)
 
         self.parse_metric_json(graph,metrics_json)
 
     def parse_metric_json(self, graph, metrics_json):
         try:
+            print("---------------------------------\n")
             for micro in graph.keys():
                 if micro.tag in metrics_json.keys():
                     temp_json = metrics_json[micro.tag]['data']['result']
                     if temp_json:
-                        print(temp_json[0]['value'][1])
+                        print("tag: ", micro.tag)
+                        print("dynamic_emulate_workload: ", temp_json[0]['value'][1], "\n")
                         micro.set_dynamic_workload(temp_json[0]['value'][1])
         except:
             print("Bad tag")

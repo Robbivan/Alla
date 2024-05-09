@@ -1,4 +1,4 @@
-from microservice import Microservice
+from core.microservice import Microservice
 import json
 
 
@@ -14,6 +14,7 @@ class CreatorGraph:
             tag = service_data['tag']
             fullname = service_data['fullname']
             limit = None
+            instance = True
             if 'limit' in service_data:
                 limit = service_data['limit']
             rest = 0  # default value for flow
@@ -21,7 +22,10 @@ class CreatorGraph:
                 rest = service_data['rest']
                 if rest < 0 or rest > 1:
                     raise ValueError("Weight must be between 0 and 1 in rest", rest)
-            microservices[tag] = Microservice(tag, fullname, limit, rest)
+            if 'instance' in service_data:
+                instance = service_data['instance']
+
+            microservices[tag] = Microservice(tag, fullname, limit, instance, rest)
         return microservices
 
 
@@ -41,10 +45,6 @@ class CreatorGraph:
                 except KeyError as error:
                     raise ValueError("No exist microservice in *.json with name:", error)
             graph[microservices[tag]] = correct_neighbors
-
-            #graph[microservices[tag]] = [(microservices[neighbor['tag']], neighbor['weight']) for neighbor in neighbors]
-
-        print(graph)
         return graph
 
     def loading_json(self, filename):

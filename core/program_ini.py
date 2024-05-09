@@ -2,12 +2,12 @@ import yaml
 
 
 class ProgramIni:
-    def __init__(self, config_name="config/master-config.yml"):
+    def __init__(self, config_name="config/master-config.yaml"):
         self.company_name = None
         self.project_name = None
         self.info_output = None
-        self.is_check_cycle = None
         self.round_number = 4  # default round number
+        self.integration = None
         self.json_file = None
         self.gateway_load = None
 
@@ -19,7 +19,7 @@ class ProgramIni:
         self.company_name = data['company_name']
         self.project_name = data['project_name']
         self.info_output = data['info_output']
-        self.is_check_cycle = data['is_check_cycle']
+        self.integration = data['integration']
         self.json_file = data['json_file']
         self.gateway_load = data['gateway_load']
         if data['round_result']['status'] is True:
