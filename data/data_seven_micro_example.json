@@ -14,6 +14,7 @@
       "tag": "A",
       "fullname": "Service A",
       "limit": 2600,
+      "instance": false,
       "rest": 0.3,
       "neighbors": [
         {"tag": "B", "weight": 0.7}

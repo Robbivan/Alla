@@ -27,7 +27,6 @@ class AlgoGraph(Algo):
         for micro in sequence:
             for link in graph[micro]:
                 current_workload_to_other = micro.get_model_workload() * (1 - micro.get_rest())
-                # print(self.round_number)
                 link[0].set_model_workload(
                     round(link[0].get_model_workload() + current_workload_to_other * link[1], self.round_number))
 

@@ -5,29 +5,31 @@ from pyvis.network import Network
 
 
 class Gui:
-
     def do_gui(self, program, graph, sort_list_graph):
+        print("----------\n\nGui turn ON\n")
         net = Network(notebook=True)  # отображение в Блокноте
 
         color_nodes = ['#88F02E'] * len(sort_list_graph)
 
         for item in sort_list_graph:
-            print(item.limit)
             if item.limit is not None:
                 if item.model_workload > item.limit:
                     index = sort_list_graph.index(item)
                     color_nodes[index] = "#F53D56"
-                print(item.dynamic_workload)
                 if item.dynamic_workload is not None:
                     if float(item.dynamic_workload) > item.limit:
                             index = sort_list_graph.index(item)
                             color_nodes[index] = "#C278EB"
 
-
-
-        # print(color_nodes)
-
         title = self.make_str_to_title_node(sort_list_graph, color_nodes)
+
+        for index, color in enumerate(color_nodes):
+            if color == "#F53D56" or color == "#C278EB":
+                if not sort_list_graph[index].instance:
+                    title[index] = title[index] + "\nРекомендация: Необходимо увеличить количество ресурсов для данного микросервиса"
+                else:
+                    title[index] = title[index] + "\nРекомендация: Необходимо инстанцировать данный микроссервис\n" \
+                                              " через Load Balancer, например Nginx"
 
         net.add_nodes([item.id for item in sort_list_graph],
                       label=[item.tag for item in sort_list_graph],
@@ -38,19 +40,10 @@ class Gui:
 
         for micro in keys:
             for link in graph[micro]:
-                print(link)
                 net.add_edge(micro.id, link[0].id, arrows='to', color='#4596FF', label=str(link[1]), font={'size': 10})
-        print(graph)
-
-        # net.add_nodes([1, 2, 3],
-        #               value=[10, 100, 400],
-        #               title=['I am node 1', 'node 2 here', 'and im node 3'],
-        #               x=[21.4, 54.2, 11.2],
-        #               y=[100.2, 23.54, 32.1],
-        #               label=['NODE 1', 'NODE 2', 'NODE 3'],
-        #               color=['#00ff1e', '#162347', '#dd4b39'])
-        # net.show_buttons()
-
+        ###
+        # net.show_buttons() # for setting gui in pyvis
+        ###
         net.show("html/result_temp.html")
 
         self.html_info_edit()
@@ -80,7 +73,6 @@ class Gui:
                              list_of_model_workload,
                              list_of_rest)]
 
-        print(modified_list)
         return modified_list
 
     def html_info_edit(self):
@@ -105,5 +97,3 @@ class Gui:
         with open('html/result.html', 'w') as f:
             f.write(second_html_content)
         os.remove(file_temp_path)
-
-        # print(file_path)
