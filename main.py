@@ -62,8 +62,8 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='keys')
     parser.add_argument('-emulate_dynamic', '--emulate_dynamic',
                         help='Parameter for emulate dynamic workload with custom metric '
-                             'from directory emulate_dynamic/{your_directory}. ' 
-                             'Accept a name of directory where custom metrics save')
+                             'from file json emulate_dynamic/{your_file}. ' 
+                             'Accept a name of file where custom metrics save')
     args = parser.parse_args()
     if args.emulate_dynamic:
         print("your file: ", args.emulate_dynamic, "\n")
