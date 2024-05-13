@@ -25,8 +25,5 @@ class ProgramIni:
         if data['round_result']['status'] is True:
             self.round_number = data['round_result']['number_of_decimal_places']
 
-    def get_is_check_cycle(self):
-        return self.is_check_cycle
-
     def get_round_number(self):
         return self.round_number
